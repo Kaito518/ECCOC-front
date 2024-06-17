@@ -17,7 +17,7 @@
 		37E5322A2C1F652600317E81 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532292C1F652600317E81 /* Router.swift */; };
 		37E5322D2C1F659400317E81 /* CharaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5322C2C1F659400317E81 /* CharaView.swift */; };
 		37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5322F2C1F6FDF00317E81 /* NaviBar.swift */; };
-		37E532372C20934500317E81 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532362C20934500317E81 /* HomeView.swift */; };
+		37E532372C20934500317E81 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532362C20934500317E81 /* MapView.swift */; };
 		37E532392C20937100317E81 /* GachaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532382C20937100317E81 /* GachaView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +52,7 @@
 		37E532292C1F652600317E81 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		37E5322C2C1F659400317E81 /* CharaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaView.swift; sourceTree = "<group>"; };
 		37E5322F2C1F6FDF00317E81 /* NaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviBar.swift; sourceTree = "<group>"; };
-		37E532362C20934500317E81 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		37E532362C20934500317E81 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37E532382C20937100317E81 /* GachaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,7 +145,7 @@
 				37E5322E2C1F6FC900317E81 /* Component */,
 				37E5322C2C1F659400317E81 /* CharaView.swift */,
 				37E532382C20937100317E81 /* GachaView.swift */,
-				37E532362C20934500317E81 /* HomeView.swift */,
+				37E532362C20934500317E81 /* MapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 				37E532392C20937100317E81 /* GachaView.swift in Sources */,
 				37E5322D2C1F659400317E81 /* CharaView.swift in Sources */,
 				37E5322A2C1F652600317E81 /* Router.swift in Sources */,
-				37E532372C20934500317E81 /* HomeView.swift in Sources */,
+				37E532372C20934500317E81 /* MapView.swift in Sources */,
 				37E531FD2C1F641300317E81 /* ECCOC_frontApp.swift in Sources */,
 				37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */,
 			);

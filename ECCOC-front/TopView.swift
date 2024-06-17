@@ -8,14 +8,14 @@
 import SwiftUI
 
 enum ViewType {
-    case home
+    case map
     case chara
     case gacha
 }
 
 struct TopView: View {
     @State var path = NavigationPath()
-    @State private var currentView: ViewType = .home
+    @State private var currentView: ViewType = .chara
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -27,7 +27,7 @@ struct TopView: View {
                     case .gacha:
                         GachaView()
                     default:
-                        HomeView()
+                        MapView()
                     }
                 }
                 GeometryReader{ proxy in
@@ -39,7 +39,7 @@ struct TopView: View {
                             },
                             homeFunc: {
                                 () -> Void in
-                                currentView = .home
+                                currentView = .map
                             },
                             gachaFunc: {
                                 () -> Void in
