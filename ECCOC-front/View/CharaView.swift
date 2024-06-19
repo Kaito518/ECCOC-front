@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct CharaView: View {
+    @State var path = NavigationPath()
+    
     var body: some View {
-        Text("Chara!")
+        NavigationStack(path: $path) {
+            List{
+                NavigationLink(Router.root.toString, value: Router.root)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Router.self, destination: { append in
+                append.Destination()
+                    .navigationTitle(append.toString)
+                    .navigationBarTitleDisplayMode(.inline)
+            })
+        }
     }
 }
 
