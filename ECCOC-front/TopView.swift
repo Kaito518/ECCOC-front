@@ -19,23 +19,15 @@ struct TopView: View {
 
     var body: some View {
         ZStack{
-            NavigationStack(path: $path) {
-                HStack {
-                    switch currentView {
-                    case .chara:
-                        CharaView()
-                    case .gacha:
-                        GachaView()
-                    default:
-                        MapView()
-                    }
+            HStack {
+                switch currentView {
+                case .chara:
+                    CharaView()
+                case .gacha:
+                    GachaView()
+                default:
+                    MapView()
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationDestination(for: Router.self, destination: { append in
-                    append.Destination()
-                        .navigationTitle(append.toString)
-                        .navigationBarTitleDisplayMode(.inline)
-                })
             }
             VStack{
                 NaviBar(
