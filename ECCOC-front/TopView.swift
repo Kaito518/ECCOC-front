@@ -15,47 +15,37 @@ enum ViewType {
 
 struct TopView: View {
     @State var path = NavigationPath()
-    @State private var currentView: ViewType = .gacha
+    @State private var currentView: ViewType = .map
 
     var body: some View {
-        NavigationStack(path: $path) {
-            ZStack{
-                HStack {
-                    switch currentView {
-                    case .chara:
-                        CharaView()
-                    case .gacha:
-                        GachaView()
-                    default:
-                        MapView()
-                    }
+        ZStack{
+            HStack {
+                switch currentView {
+                case .chara:
+                    CharaView()
+                case .gacha:
+                    GachaView()
+                default:
+                    MapView()
                 }
-                GeometryReader{ proxy in
-                    VStack{
-                        NaviBar(
-                            charaFunc: {
-                                () -> Void in
-                                currentView = .chara
-                            },
-                            homeFunc: {
-                                () -> Void in
-                                currentView = .map
-                            },
-                            gachaFunc: {
-                                () -> Void in
-                                currentView = .gacha
-                            }
-                        )
-                    }
-                }
-                .edgesIgnoringSafeArea(.all)
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Router.self, destination: { append in
-                append.Destination()
-                    .navigationTitle(append.toString)
-                    .navigationBarTitleDisplayMode(.inline)
-            })
+            VStack{
+                NaviBar(
+                    charaFunc: {
+                        () -> Void in
+                        currentView = .chara
+                    },
+                    homeFunc: {
+                        () -> Void in
+                        currentView = .map
+                    },
+                    gachaFunc: {
+                        () -> Void in
+                        currentView = .gacha
+                    }
+                )
+            }
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }

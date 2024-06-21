@@ -66,6 +66,7 @@
 		A47CF4F42C2496A7006F8B50 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaResultView.swift; sourceTree = "<group>"; };
 		A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCatalogView.swift; sourceTree = "<group>"; };
+		37E5323A2C20A7EE00317E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +117,7 @@
 		37E531FB2C1F641300317E81 /* ECCOC-front */ = {
 			isa = PBXGroup;
 			children = (
+				37E5323A2C20A7EE00317E81 /* Info.plist */,
 				37E5322B2C1F657A00317E81 /* View */,
 				37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */,
 				37E531FE2C1F641300317E81 /* TopView.swift */,
@@ -485,6 +487,8 @@
 				DEVELOPMENT_TEAM = L6R7SM63VX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ECCOC-front/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在位置を取得します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -514,6 +518,8 @@
 				DEVELOPMENT_TEAM = L6R7SM63VX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ECCOC-front/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在位置を取得します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
