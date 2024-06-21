@@ -19,6 +19,10 @@
 		37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5322F2C1F6FDF00317E81 /* NaviBar.swift */; };
 		37E532372C20934500317E81 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532362C20934500317E81 /* MapView.swift */; };
 		37E532392C20937100317E81 /* GachaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532382C20937100317E81 /* GachaView.swift */; };
+		ED62E4742C2526E5005DB211 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4732C2526E5005DB211 /* APIService.swift */; };
+		ED62E4762C252708005DB211 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4752C252708005DB211 /* ContentView.swift */; };
+		ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4772C25E927005DB211 /* RegisterView.swift */; };
+		ED62E47A2C25E9DC005DB211 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4792C25E9DC005DB211 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +58,10 @@
 		37E5322F2C1F6FDF00317E81 /* NaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviBar.swift; sourceTree = "<group>"; };
 		37E532362C20934500317E81 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37E532382C20937100317E81 /* GachaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaView.swift; sourceTree = "<group>"; };
+		ED62E4732C2526E5005DB211 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = "ECCOC-front/APIService.swift"; sourceTree = SOURCE_ROOT; };
+		ED62E4752C252708005DB211 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ED62E4772C25E927005DB211 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		ED62E4792C25E9DC005DB211 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +114,11 @@
 			children = (
 				37E5322B2C1F657A00317E81 /* View */,
 				37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */,
+				ED62E4732C2526E5005DB211 /* APIService.swift */,
 				37E531FE2C1F641300317E81 /* TopView.swift */,
+				ED62E4752C252708005DB211 /* ContentView.swift */,
+				ED62E4792C25E9DC005DB211 /* LoginView.swift */,
+				ED62E4772C25E927005DB211 /* RegisterView.swift */,
 				37E532292C1F652600317E81 /* Router.swift */,
 				37E532002C1F641400317E81 /* Assets.xcassets */,
 				37E532022C1F641400317E81 /* Preview Content */,
@@ -289,11 +301,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E531FF2C1F641300317E81 /* TopView.swift in Sources */,
+				ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */,
 				37E532392C20937100317E81 /* GachaView.swift in Sources */,
 				37E5322D2C1F659400317E81 /* CharaView.swift in Sources */,
 				37E5322A2C1F652600317E81 /* Router.swift in Sources */,
 				37E532372C20934500317E81 /* MapView.swift in Sources */,
+				ED62E4762C252708005DB211 /* ContentView.swift in Sources */,
 				37E531FD2C1F641300317E81 /* ECCOC_frontApp.swift in Sources */,
+				ED62E47A2C25E9DC005DB211 /* LoginView.swift in Sources */,
+				ED62E4742C2526E5005DB211 /* APIService.swift in Sources */,
 				37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
