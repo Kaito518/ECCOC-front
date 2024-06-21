@@ -15,7 +15,7 @@ enum ViewType {
 
 struct TopView: View {
     @State var path = NavigationPath()
-    @State private var currentView: ViewType = .chara
+    @State private var currentView: ViewType = .gacha
 
     var body: some View {
         NavigationStack(path: $path) {

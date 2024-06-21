@@ -10,6 +10,7 @@ import SwiftUI
 struct CharaView: View {
     var body: some View {
         Text("Chara!")
+        NavigationLink(Router.root.toString, value: Router.root)
     }
 }
 

@@ -19,6 +19,12 @@
 		37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5322F2C1F6FDF00317E81 /* NaviBar.swift */; };
 		37E532372C20934500317E81 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532362C20934500317E81 /* MapView.swift */; };
 		37E532392C20937100317E81 /* GachaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532382C20937100317E81 /* GachaView.swift */; };
+		A466B0352C23CFE90094DC8C /* MailBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466B0342C23CFE90094DC8C /* MailBox.swift */; };
+		A466B0372C23D1C40094DC8C /* TotalCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466B0362C23D1C40094DC8C /* TotalCoins.swift */; };
+		A466B0392C24885C0094DC8C /* Btn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466B0382C24885B0094DC8C /* Btn.swift */; };
+		A47CF4F52C2496A7006F8B50 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CF4F42C2496A7006F8B50 /* MailView.swift */; };
+		A47CF4F72C250B6D006F8B50 /* GachaResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */; };
+		A47CF4F92C2540E4006F8B50 /* CharacterCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +60,12 @@
 		37E5322F2C1F6FDF00317E81 /* NaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviBar.swift; sourceTree = "<group>"; };
 		37E532362C20934500317E81 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37E532382C20937100317E81 /* GachaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaView.swift; sourceTree = "<group>"; };
+		A466B0342C23CFE90094DC8C /* MailBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBox.swift; sourceTree = "<group>"; };
+		A466B0362C23D1C40094DC8C /* TotalCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCoins.swift; sourceTree = "<group>"; };
+		A466B0382C24885B0094DC8C /* Btn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Btn.swift; sourceTree = "<group>"; };
+		A47CF4F42C2496A7006F8B50 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaResultView.swift; sourceTree = "<group>"; };
+		A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCatalogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +158,9 @@
 				37E5322C2C1F659400317E81 /* CharaView.swift */,
 				37E532382C20937100317E81 /* GachaView.swift */,
 				37E532362C20934500317E81 /* MapView.swift */,
+				A47CF4F42C2496A7006F8B50 /* MailView.swift */,
+				A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */,
+				A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,6 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				37E5322F2C1F6FDF00317E81 /* NaviBar.swift */,
+				A466B0342C23CFE90094DC8C /* MailBox.swift */,
+				A466B0362C23D1C40094DC8C /* TotalCoins.swift */,
+				A466B0382C24885B0094DC8C /* Btn.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -292,8 +310,14 @@
 				37E532392C20937100317E81 /* GachaView.swift in Sources */,
 				37E5322D2C1F659400317E81 /* CharaView.swift in Sources */,
 				37E5322A2C1F652600317E81 /* Router.swift in Sources */,
+				A47CF4F92C2540E4006F8B50 /* CharacterCatalogView.swift in Sources */,
+				A47CF4F52C2496A7006F8B50 /* MailView.swift in Sources */,
+				A466B0392C24885C0094DC8C /* Btn.swift in Sources */,
+				A466B0352C23CFE90094DC8C /* MailBox.swift in Sources */,
 				37E532372C20934500317E81 /* MapView.swift in Sources */,
+				A466B0372C23D1C40094DC8C /* TotalCoins.swift in Sources */,
 				37E531FD2C1F641300317E81 /* ECCOC_frontApp.swift in Sources */,
+				A47CF4F72C250B6D006F8B50 /* GachaResultView.swift in Sources */,
 				37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
