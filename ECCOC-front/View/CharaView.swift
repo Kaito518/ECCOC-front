@@ -11,17 +11,8 @@ struct CharaView: View {
     @State var path = NavigationPath()
     
     var body: some View {
-        NavigationStack(path: $path) {
-            List{
-                NavigationLink(Router.root.toString, value: Router.root)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Router.self, destination: { append in
-                append.Destination()
-                    .navigationTitle(append.toString)
-                    .navigationBarTitleDisplayMode(.inline)
-            })
-        }
+        Text("Chara!")
+        NavigationLink(Router.root.toString, value: Router.root)
     }
 }
 
