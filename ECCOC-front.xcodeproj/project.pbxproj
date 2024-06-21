@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		379986682C257A4400B46E10 /* CreateGameStepOenVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */; };
 		37E531FD2C1F641300317E81 /* ECCOC_frontApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */; };
 		37E531FF2C1F641300317E81 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E531FE2C1F641300317E81 /* TopView.swift */; };
 		37E532012C1F641400317E81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E532002C1F641400317E81 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameStepOenVIew.swift; sourceTree = "<group>"; };
 		37E531F92C1F641300317E81 /* ECCOC-front.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECCOC-front.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECCOC_frontApp.swift; sourceTree = "<group>"; };
 		37E531FE2C1F641300317E81 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				37E5322C2C1F659400317E81 /* CharaView.swift */,
 				37E532382C20937100317E81 /* GachaView.swift */,
 				37E532362C20934500317E81 /* MapView.swift */,
+				379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				37E5322D2C1F659400317E81 /* CharaView.swift in Sources */,
 				37E5322A2C1F652600317E81 /* Router.swift in Sources */,
 				37E532372C20934500317E81 /* MapView.swift in Sources */,
+				379986682C257A4400B46E10 /* CreateGameStepOenVIew.swift in Sources */,
 				37E531FD2C1F641300317E81 /* ECCOC_frontApp.swift in Sources */,
 				37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */,
 			);
