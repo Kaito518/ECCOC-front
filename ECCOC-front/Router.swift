@@ -8,10 +8,10 @@
 import SwiftUI
 
 enum Router: Int{
-    case root, gameCreateStep1
+    case root, gameCreateStep1, gameCreateStep2
     
     var toString: String{
-        ["ホーム", "ステップ１"][self.rawValue]
+        ["ホーム"][self.rawValue]
     }
     
     @ViewBuilder
@@ -19,6 +19,7 @@ enum Router: Int{
         switch self {
         case .root: MapView()
         case .gameCreateStep1: CreateGameStepOenVIew()
+        case .gameCreateStep2: CreateGameStepTwoVIew()
         }
     }
 }

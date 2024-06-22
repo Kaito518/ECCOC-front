@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		377743742C26652A00BB69D6 /* CreateGameStepTwoVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377743732C26652A00BB69D6 /* CreateGameStepTwoVIew.swift */; };
 		379986682C257A4400B46E10 /* CreateGameStepOenVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */; };
 		37E531FD2C1F641300317E81 /* ECCOC_frontApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */; };
 		37E531FF2C1F641300317E81 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E531FE2C1F641300317E81 /* TopView.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		377743732C26652A00BB69D6 /* CreateGameStepTwoVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameStepTwoVIew.swift; sourceTree = "<group>"; };
 		379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameStepOenVIew.swift; sourceTree = "<group>"; };
 		37E531F92C1F641300317E81 /* ECCOC-front.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECCOC-front.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECCOC_frontApp.swift; sourceTree = "<group>"; };
@@ -62,13 +64,13 @@
 		37E5322F2C1F6FDF00317E81 /* NaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviBar.swift; sourceTree = "<group>"; };
 		37E532362C20934500317E81 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37E532382C20937100317E81 /* GachaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaView.swift; sourceTree = "<group>"; };
+		37E5323A2C20A7EE00317E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A466B0342C23CFE90094DC8C /* MailBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBox.swift; sourceTree = "<group>"; };
 		A466B0362C23D1C40094DC8C /* TotalCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCoins.swift; sourceTree = "<group>"; };
 		A466B0382C24885B0094DC8C /* Btn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Btn.swift; sourceTree = "<group>"; };
 		A47CF4F42C2496A7006F8B50 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaResultView.swift; sourceTree = "<group>"; };
 		A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCatalogView.swift; sourceTree = "<group>"; };
-		37E5323A2C20A7EE00317E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				37E532382C20937100317E81 /* GachaView.swift */,
 				37E532362C20934500317E81 /* MapView.swift */,
 				379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */,
+				377743732C26652A00BB69D6 /* CreateGameStepTwoVIew.swift */,
 				A47CF4F42C2496A7006F8B50 /* MailView.swift */,
 				A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */,
 				A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */,
@@ -318,6 +321,7 @@
 				A47CF4F92C2540E4006F8B50 /* CharacterCatalogView.swift in Sources */,
 				A47CF4F52C2496A7006F8B50 /* MailView.swift in Sources */,
 				A466B0392C24885C0094DC8C /* Btn.swift in Sources */,
+				377743742C26652A00BB69D6 /* CreateGameStepTwoVIew.swift in Sources */,
 				A466B0352C23CFE90094DC8C /* MailBox.swift in Sources */,
 				37E532372C20934500317E81 /* MapView.swift in Sources */,
 				379986682C257A4400B46E10 /* CreateGameStepOenVIew.swift in Sources */,
