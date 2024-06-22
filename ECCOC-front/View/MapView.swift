@@ -76,7 +76,6 @@ struct MapView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Router.self, destination: { append in
                 append.Destination()
-                    .navigationTitle(append.toString)
                     .navigationBarTitleDisplayMode(.inline)
             })
         }
