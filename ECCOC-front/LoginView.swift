@@ -28,7 +28,6 @@ struct LoginView: View {
                 .offset(x:-5 ,y: 10)
             
             VStack {
-
                 // 登録フォーム
                 VStack(alignment: .center, spacing: 40) {
                     HStack {
@@ -59,7 +58,7 @@ struct LoginView: View {
                         .offset(y:-85)
 
                     Button(action: {
-                        registerUser()
+                        isLoginSuccessful = true
                     }) {
                         Text("ログイン")
                             .font(.headline)
@@ -82,25 +81,21 @@ struct LoginView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Error"), message: Text("Login failed"), dismissButton: .default(Text("OK")))
             }
-        }
-    }
-
-    private func registerUser() {
-        guard !username.isEmpty, !email.isEmpty, !password.isEmpty else {
-            // 入力が不足している場合の処理
-            return
-        }
-
-        apiService.register(username: username, email: email, password: password) { user in
-            if user != nil {
-                isLoginSuccessful = true
-            } else {
-                showAlert = true
+            
+            NavigationLink(destination: DestinationView(), isActive: $isLoginSuccessful) {
+                EmptyView()
             }
         }
     }
 }
 
+struct DestinationView: View {
+    var body: some View {
+        Text("Welcome to the destination view!")
+            .font(.largeTitle)
+            .foregroundColor(.black)
+    }
+}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

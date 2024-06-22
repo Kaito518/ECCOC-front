@@ -23,6 +23,7 @@
 		ED62E4762C252708005DB211 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4752C252708005DB211 /* ContentView.swift */; };
 		ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4772C25E927005DB211 /* RegisterView.swift */; };
 		ED62E47A2C25E9DC005DB211 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4792C25E9DC005DB211 /* LoginView.swift */; };
+		ED62E47C2C269D3C005DB211 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E47B2C269D3C005DB211 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		ED62E4752C252708005DB211 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		ED62E4772C25E927005DB211 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		ED62E4792C25E9DC005DB211 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		ED62E47B2C269D3C005DB211 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				ED62E4732C2526E5005DB211 /* APIService.swift */,
 				37E531FE2C1F641300317E81 /* TopView.swift */,
 				ED62E4752C252708005DB211 /* ContentView.swift */,
+				ED62E47B2C269D3C005DB211 /* AuthService.swift */,
 				ED62E4792C25E9DC005DB211 /* LoginView.swift */,
 				ED62E4772C25E927005DB211 /* RegisterView.swift */,
 				37E532292C1F652600317E81 /* Router.swift */,
@@ -303,6 +306,7 @@
 				37E531FF2C1F641300317E81 /* TopView.swift in Sources */,
 				ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */,
 				37E532392C20937100317E81 /* GachaView.swift in Sources */,
+				ED62E47C2C269D3C005DB211 /* AuthService.swift in Sources */,
 				37E5322D2C1F659400317E81 /* CharaView.swift in Sources */,
 				37E5322A2C1F652600317E81 /* Router.swift in Sources */,
 				37E532372C20934500317E81 /* MapView.swift in Sources */,
@@ -474,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECCOC-front/Preview Content\"";
-				DEVELOPMENT_TEAM = L6R7SM63VX;
+				DEVELOPMENT_TEAM = W85KV47HCN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -488,7 +492,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "name.ken.ECCOC-front";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.ECCOC-front-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -504,7 +508,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ECCOC-front/Preview Content\"";
-				DEVELOPMENT_TEAM = L6R7SM63VX;
+				DEVELOPMENT_TEAM = W85KV47HCN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -518,7 +522,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "name.ken.ECCOC-front";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.ECCOC-front-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
