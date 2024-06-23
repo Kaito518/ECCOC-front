@@ -8,17 +8,18 @@
 import SwiftUI
 
 enum Router: Int{
-    case root, chara
+    case root, chara, charaResult
     
     var toString: String{
         ["ホーム", "設定"][self.rawValue]
     }
     
     @ViewBuilder
-    func Destination() -> some View{
+    func Destination(CharaName:String?, CharaExplanation: String?) -> some View{
         switch self {
         case .root: MapView()
         case .chara: CharaView()
+        case .charaResult: GachaResultView(CharaName: CharaName!, CharaExplanation: CharaExplanation!)
         }
     }
 }

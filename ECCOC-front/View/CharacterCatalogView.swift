@@ -8,15 +8,30 @@
 import SwiftUI
 
 struct CharacterCatalogView: View {
-    @State private var selectedCatalog: String? = "隊員"
+    var ReleasedCharacter: String
+    
+    @State private var selectedCatalog: String?
     let Catalogs = ["隊員","たいちょ","くまさん","ぐまさん","囚人","コリパ","スライム","Sキング","看守","?","?","?"]
+    
+    init(ReleasedCharacter: String) {
+            self.ReleasedCharacter = ReleasedCharacter
+            _selectedCatalog = State(initialValue: ReleasedCharacter)
+        }
     
     var body: some View {
         VStack {
-            Text(selectedCatalog ?? "Default Text")
-                .fontWeight(.bold)
-                .frame(width: 240,height: 50)
-                .border(Color("sabu2"), width:5)
+            ZStack {
+                HStack{}
+                    .frame(width: 240,height: 50)
+                    .background(Color("sabu2"))
+                    .offset(x: 5,y: 5)
+                
+                Text(selectedCatalog ?? "Default Text")
+                    .fontWeight(.bold)
+                    .frame(width: 240,height: 50)
+                    .background(Color.white)
+                    .border(Color.black, width:2)
+            }
             
             Image(selectedCatalog ?? "Default Text")
                 .resizable()
@@ -70,9 +85,10 @@ struct CharacterCatalogView: View {
             .background(Color("Mailbg"))
         }
         .offset(x: 0,y: 50)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    CharacterCatalogView()
+    CharacterCatalogView(ReleasedCharacter: "たいちょ")
 }
