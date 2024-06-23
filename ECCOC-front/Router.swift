@@ -11,7 +11,7 @@ enum Router: Int{
     case root, chara, charaResult
     
     var toString: String{
-        ["ホーム", "設定"][self.rawValue]
+        ["ホーム"][self.rawValue]
     }
     
     @ViewBuilder
