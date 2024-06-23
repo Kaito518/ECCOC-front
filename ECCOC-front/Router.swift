@@ -15,11 +15,11 @@ enum Router: Int{
     }
     
     @ViewBuilder
-    func Destination(CharaName:String?, CharaExplanation: String?) -> some View{
+    func Destination(CharaName:String = " ", CharaExplanation: String  = "") -> some View{
         switch self {
         case .root: MapView()
         case .chara: CharaView()
-        case .charaResult: GachaResultView(CharaName: CharaName!, CharaExplanation: CharaExplanation!)
+        case .charaResult: GachaResultView(CharaName: CharaName, CharaExplanation: CharaExplanation)
         }
     }
 }
