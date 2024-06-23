@@ -10,12 +10,11 @@ import SwiftUI
 struct GachaResultView: View {
     var CharaName: String
     var CharaExplanation: String
+    @State private var path = NavigationPath()
     
     var body: some View {
         VStack(spacing: 20) {
-            TotalCoins(TotalC: 0)
-            
-            Image("taityou")
+            Image(CharaName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300,height: 300)
@@ -46,25 +45,25 @@ struct GachaResultView: View {
                         }
                     )
                     .offset(x: 0,y: 4)
-
                 
-                    HStack(spacing: 20){
-                        VStack {
-                            Text("説明")
-                                .foregroundColor(Color("sabu2"))
-                                .font(.system(size: 18))
-                                .fontWeight(.bold)
-                                .offset(x: 0,y: 0)
-                            
-                            Spacer()
-                        }
-                        ScrollView{
-                            Text(CharaExplanation)
-                                .frame(width: 260)
-                        }
+                
+                HStack(spacing: 20){
+                    VStack {
+                        Text("説明")
+                            .foregroundColor(Color("sabu2"))
+                            .font(.system(size: 18))
+                            .fontWeight(.bold)
+                            .offset(x: 0,y: 0)
+                        
+                        Spacer()
                     }
-                    .offset(x: 0,y: 8)
-                    
+                    ScrollView{
+                        Text(CharaExplanation)
+                            .frame(width: 260)
+                    }
+                }
+                .offset(x: 0,y: 8)
+                
             }
             .frame(width: 350,height: 200)
             .background(.white)
@@ -74,10 +73,12 @@ struct GachaResultView: View {
                     .stroke(Color("sabu2"),lineWidth: 10)
             )
             
-            Btn(text: "キャラ図鑑へ", bgColor: "BtnColor")
-
+            NavigationLink(destination: CharacterCatalogView(ReleasedCharacter: CharaName)) {
+                Btn(text: "キャラ図鑑へ", bgColor: "BtnColor")
+            }
         }
-        .offset(x: 0,y: -40)
+        .offset(x: 0,y: -50)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
