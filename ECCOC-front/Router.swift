@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Router: Int{
-    case root, gameCreateStep1, gameCreateStep2
+    case root
     
     var toString: String{
         ["ホーム"][self.rawValue]
@@ -18,8 +18,6 @@ enum Router: Int{
     func Destination() -> some View{
         switch self {
         case .root: MapView()
-        case .gameCreateStep1: CreateGameStepOenVIew()
-        case .gameCreateStep2: CreateGameStepTwoVIew()
         }
     }
 }

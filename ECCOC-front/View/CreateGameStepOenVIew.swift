@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct CreateGameStepOenVIew: View {
+    @StateObject var gameViewModel: GameViewModel
     @Environment(\.dismiss) var dismiss
     let bounds = UIScreen.main.bounds;
     @State var inputName = ""
@@ -54,7 +55,7 @@ struct CreateGameStepOenVIew: View {
                 Spacer()
             }
             .frame(height: bounds.height * 0.7)
-            NavigationLink(value: Router.gameCreateStep2){
+            NavigationLink(destination: CreateGameStepTwoVIew(gameViewModel: gameViewModel)){
                 Btn(text: "次へ", bgColor: "BtnColor")
             }
             Spacer()
@@ -75,5 +76,5 @@ struct CreateGameStepOenVIew: View {
 }
 
 #Preview {
-    CreateGameStepOenVIew()
+    CreateGameStepOenVIew(gameViewModel: GameViewModel())
 }
