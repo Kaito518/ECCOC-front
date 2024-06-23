@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct CharaView: View {
+    @State var path = NavigationPath()
+    
     var body: some View {
         Text("Chara!")
+        NavigationLink(Router.root.toString, value: Router.root)
     }
 }
 

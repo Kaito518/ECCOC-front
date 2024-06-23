@@ -19,7 +19,7 @@ struct NaviBarBase: Shape {
     }
 }
 
-struct Circle: Shape {
+struct NaviCircle: Shape {
     var r = CGFloat(80);
     var x = CGFloat(0);
     var y = CGFloat(0);
@@ -78,17 +78,17 @@ struct NaviBar: View {
         ZStack{
             NaviBarBase()
                 .foregroundColor(.yellow)
-            Circle(r: 60, x: bounds.width / 2, y: bounds.height - 75)
+            NaviCircle(r: 60, x: bounds.width / 2, y: bounds.height - 75)
                 .foregroundColor(.yellow)
             Line()
                 .stroke(style: .init(lineWidth: 2, dash: [6, 3]))
                 .foregroundColor(.white)
-            Circle(r: 50, x: bounds.width / 2, y: bounds.height - 75)
+            NaviCircle(r: 50, x: bounds.width / 2, y: bounds.height - 75)
                 .foregroundColor(.yellow)
             SemiCircle(r: 50)
                 .stroke(style: .init(lineWidth: 2,dash: [6, 3]))
                 .foregroundColor(.white)
-            Circle(r: 40, x: bounds.width / 2, y: bounds.height - 75)
+            NaviCircle(r: 40, x: bounds.width / 2, y: bounds.height - 75)
                 .foregroundColor(.white)
                 .overlay(
                     Image(systemName: "house")
