@@ -15,17 +15,16 @@ struct Acount {
 }
 
 struct CreateGameStepThreeVIew: View {
-    @StateObject var gameViewModel: GameViewModel
     @Environment(\.dismiss) var dismiss
     let bounds = UIScreen.main.bounds;
     @State var inputName = ""
     @State var isPopup = false
     @State private var acounts = [
-        Acount(name: "ken", icon: "icon1", isInvitation: false),
-        Acount(name: "higo", icon: "icon3", isInvitation: false),
-        Acount(name: "kawakami", icon: "icon1", isInvitation: false),
-        Acount(name: "koudai", icon: "icon1", isInvitation: false),
-        Acount(name: "kawagishi", icon: "icon2", isInvitation: false)
+        Acount(name: "ken", icon: "スライム", isInvitation: false),
+        Acount(name: "higo", icon: "たいちょ", isInvitation: false),
+        Acount(name: "kawakami", icon: "スライム", isInvitation: false),
+        Acount(name: "koudai", icon: "隊員", isInvitation: false),
+        Acount(name: "kawagishi", icon: "くまさん", isInvitation: false)
     ]
     @State var testBool = false;
     @State private var isActive = false
@@ -69,6 +68,8 @@ struct CreateGameStepThreeVIew: View {
                         ForEach(0..<acounts.count, id: \.self) { index in
                             HStack{
                                 Image(acounts[index].icon)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
                                 Text(acounts[index].name)
                                     .font(.body)
                                 Spacer()
@@ -138,7 +139,7 @@ struct CreateGameStepThreeVIew: View {
                                     alignment: .bottom
                                 )
                                 .padding([.bottom], 8)
-                            Text("ECCコンピュータ専門学校")
+                            Text("東京駅")
                         }
                         VStack(spacing: 0){
                             Text("集合時間")
@@ -152,7 +153,7 @@ struct CreateGameStepThreeVIew: View {
                                     alignment: .bottom
                                 )
                                 .padding([.bottom], 8)
-                            Text("9:15")
+                            Text("20:00")
                         }
                         VStack(spacing: 0){
                             Text("開始時間")
@@ -177,7 +178,6 @@ struct CreateGameStepThreeVIew: View {
                                 }
                             Btn(text: "はい", bgColor: "BtnColor")
                                 .onTapGesture {
-                                    gameViewModel.isPlay = true
                                     isActive = true
                                 }
                             NavigationLink(destination: GamePlayMapView(), isActive: $isActive){
@@ -190,7 +190,7 @@ struct CreateGameStepThreeVIew: View {
                     .padding()
                     .background(.white)
                     .padding(8)
-                    .border(.red, width: 8)
+                    .border(Color("BtnColor"), width: 8)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
@@ -199,5 +199,5 @@ struct CreateGameStepThreeVIew: View {
 }
 
 #Preview {
-    CreateGameStepThreeVIew(gameViewModel: GameViewModel())
+    CreateGameStepThreeVIew()
 }
