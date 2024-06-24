@@ -11,7 +11,7 @@ import SwiftUI
 struct ECCOC_frontApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TopView()
         }
     }
 }

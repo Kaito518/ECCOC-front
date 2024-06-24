@@ -8,17 +8,26 @@
 import SwiftUI
 import MapKit
 
+struct IdentifiablePointAnnotation: Identifiable {
+    let id = UUID()
+    let annotation: MKPointAnnotation
+}
+
 struct CreateGameStepOenVIew: View {
-    @StateObject var gameViewModel: GameViewModel
     @Environment(\.dismiss) var dismiss
     let bounds = UIScreen.main.bounds;
     @State var inputName = ""
+    @State private var region = MKCoordinateRegion(
+        center: .init(latitude: 35.681236, longitude: 139.767125),
+        span: .init(latitudeDelta: 0.026, longitudeDelta: 0.005)
+    )
+    @State private var locations = [IdentifiablePointAnnotation]()
     var body: some View {
         VStack(spacing: 0){
             VStack(spacing: 0){
                 ZStack{
                     Circle()
-                        .foregroundColor(.red)
+                        .foregroundColor(Color("BtnColor"))
                         .frame(width: 70)
                     VStack {
                         Text("STEP")
@@ -49,13 +58,22 @@ struct CreateGameStepOenVIew: View {
                         .stroke(Color.primary.opacity(0.6), lineWidth: 0.3)
                 )
                 .padding([.bottom], 8)
-                Map()
+                Map(coordinateRegion: $region, annotationItems: locations){
+                    location in
+                    MapPin(coordinate: location.annotation.coordinate)
+                }
+                    .onTapGesture {
+                        let coordinate = region.center
+                        let newLocation = MKPointAnnotation()
+                        newLocation.coordinate = coordinate
+                        self.locations.append(IdentifiablePointAnnotation(annotation: newLocation))
+                    }
                     .border(.gray, width: 2)
                     .frame(width: bounds.width * 0.8, height: bounds.width * 0.8)
                 Spacer()
             }
             .frame(height: bounds.height * 0.7)
-            NavigationLink(destination: CreateGameStepTwoVIew(gameViewModel: gameViewModel)){
+            NavigationLink(destination: CreateGameStepTwoVIew()){
                 Btn(text: "次へ", bgColor: "BtnColor")
             }
             Spacer()
@@ -76,5 +94,5 @@ struct CreateGameStepOenVIew: View {
 }
 
 #Preview {
-    CreateGameStepOenVIew(gameViewModel: GameViewModel())
+    CreateGameStepOenVIew()
 }

@@ -91,37 +91,29 @@ struct NaviBar: View {
             NaviCircle(r: 40, x: bounds.width / 2, y: bounds.height - 75)
                 .foregroundColor(.white)
                 .overlay(
-                    Image(systemName: "house")
+                    Image("mappin")
                         .resizable()
-                        .frame(width: 45, height: 45)
+                        .frame(width: 45, height: 60)
                         .foregroundColor(.red)
                         .position(x: bounds.width / 2, y: bounds.height - 75)
                 )
                 .onTapGesture {
                     homeFunc()
                 }
-            Image("chara")
+            Image("homeIcon")
                 .resizable()
-                .frame(width: 55, height: 45)
-                .position(x: 80, y: bounds.height - 50)
+                .frame(width: 55, height: 70)
+                .position(x: 80, y: bounds.height - 40)
                 .onTapGesture {
                     charaFunc()
                 }
-            Text("キャラ")
-                .font(.caption)
-                .fontWeight(.bold)
-                .position(x: 80, y: bounds.height - 15)
             Image("gacha")
                 .resizable()
-                .frame(width: 55, height: 45)
-                .position(x: bounds.width - 80, y: bounds.height - 50)
+                .frame(width: 55, height: 70)
+                .position(x: bounds.width - 80, y: bounds.height - 40)
                 .onTapGesture {
                     gachaFunc()
                 }
-            Text("ガチャ")
-                .font(.caption)
-                .fontWeight(.bold)
-                .position(x: bounds.width - 80, y: bounds.height - 15)
         }
     }
 }

@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 
 struct MapView: View {
-    @StateObject var gameViewModel = GameViewModel();
+    var gameViewModel = false;
     // 東京駅の座標
     @State private var position: MapCameraPosition = .region(.init(
         center: .init(latitude: 35.681236, longitude: 139.767125),
@@ -25,7 +25,7 @@ struct MapView: View {
         NavigationStack(path: $path) {
             ZStack {
                 Map(position: $position) {
-                    if(gameViewModel.isPlay){
+                    if(gameViewModel){
                         ForEach(Array(num.enumerated()), id: \.element) { index, _ in
                             Annotation("", coordinate: CLLocationCoordinate2D(latitude: 35.682 + Double.random(in: -0.01...0.01),longitude: 139.766 + Double.random(in: -0.01...0.01))) {
                                 Image(systemName: "bitcoinsign.circle.fill")
@@ -42,7 +42,7 @@ struct MapView: View {
                         }
                     }
                 }
-                if(!gameViewModel.isPlay){
+                if(!gameViewModel){
                     ZStack{
                         UnevenRoundedRectangle(
                             cornerRadii: .init(
@@ -54,7 +54,7 @@ struct MapView: View {
                             style: .continuous
                         )
                         .frame(width: 160, height: 55)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(Color("BtnColor"))
                         .position(CGPoint(x: bounds.width - 80, y: bounds.height - 170))
                         UnevenRoundedRectangle(
                             cornerRadii: .init(
@@ -70,7 +70,7 @@ struct MapView: View {
                         .foregroundColor(.white)
                         .position(CGPoint(x: bounds.width - 76.5, y: bounds.height - 170))
                         
-                        NavigationLink("ゲーム作成", destination: CreateGameStepOenVIew(gameViewModel: gameViewModel))
+                        NavigationLink("ゲーム作成", destination: CreateGameStepOenVIew())
                             .bold()
                             .foregroundStyle(.white)
                             .position(CGPoint(x: bounds.width - 76.5, y: bounds.height - 170))
@@ -79,7 +79,7 @@ struct MapView: View {
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 60)
-                    .stroke(gameViewModel.isPlay ? .cyan : .clear, lineWidth: 16)
+                    .stroke(gameViewModel ? .cyan : .clear, lineWidth: 16)
             )
             .ignoresSafeArea(.all)
             .navigationBarTitleDisplayMode(.inline)
