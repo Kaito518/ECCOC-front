@@ -12,8 +12,12 @@ struct MailView: View {
     
     var body: some View {
         HStack {
-            Image("returnBtn")
-                .padding()
+            NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true)) {
+                Image("returnBtn")
+                    .resizable()
+                    .frame(width: 55, height: 55) // Adjust the size as needed
+            }
+            .offset(x: 12)
             
             Spacer()
             

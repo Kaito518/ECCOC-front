@@ -25,7 +25,7 @@ struct LoginView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-                .offset(x:-5 ,y: 10)
+                .offset(x: -5, y: 10)
             
             VStack {
                 // 登録フォーム
@@ -37,7 +37,7 @@ struct LoginView: View {
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
-                            .offset(y:-85)
+                            .offset(y: -85)
                         Spacer()
                     }
 
@@ -47,7 +47,7 @@ struct LoginView: View {
                         .frame(width: 220, height: 30)
                         .cornerRadius(1.0)
                         .shadow(radius: 1.0)
-                        .offset(y:-77)
+                        .offset(y: -77)
 
                     SecureField("パスワード", text: $password)
                         .padding()
@@ -55,7 +55,7 @@ struct LoginView: View {
                         .frame(width: 220, height: 30)
                         .cornerRadius(1.0)
                         .shadow(radius: 1.0)
-                        .offset(y:-85)
+                        .offset(y: -85)
 
                     Button(action: {
                         isLoginSuccessful = true
@@ -68,7 +68,7 @@ struct LoginView: View {
                             .background(Color.customRed)
                             .cornerRadius(10.0)
                             .shadow(radius: 5.0)
-                            .offset(y:-15)
+                            .offset(y: -15)
                     }
                 }
                 .padding(.top, 140)
@@ -82,18 +82,10 @@ struct LoginView: View {
                 Alert(title: Text("Error"), message: Text("Login failed"), dismissButton: .default(Text("OK")))
             }
             
-            NavigationLink(destination: DestinationView(), isActive: $isLoginSuccessful) {
+            NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), isActive: $isLoginSuccessful) {
                 EmptyView()
             }
         }
-    }
-}
-
-struct DestinationView: View {
-    var body: some View {
-        Text("Welcome to the destination view!")
-            .font(.largeTitle)
-            .foregroundColor(.black)
     }
 }
 

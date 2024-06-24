@@ -25,18 +25,19 @@
 		37E532302C1F6FDF00317E81 /* NaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5322F2C1F6FDF00317E81 /* NaviBar.swift */; };
 		37E532372C20934500317E81 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532362C20934500317E81 /* MapView.swift */; };
 		37E532392C20937100317E81 /* GachaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E532382C20937100317E81 /* GachaView.swift */; };
-		ED62E4742C2526E5005DB211 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4732C2526E5005DB211 /* APIService.swift */; };
-		ED62E4762C252708005DB211 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4752C252708005DB211 /* ContentView.swift */; };
-		ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4772C25E927005DB211 /* RegisterView.swift */; };
-		ED62E47A2C25E9DC005DB211 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4792C25E9DC005DB211 /* LoginView.swift */; };
-		ED62E47C2C269D3C005DB211 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E47B2C269D3C005DB211 /* AuthService.swift */; };
 		A466B0352C23CFE90094DC8C /* MailBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466B0342C23CFE90094DC8C /* MailBox.swift */; };
 		A466B0372C23D1C40094DC8C /* TotalCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466B0362C23D1C40094DC8C /* TotalCoins.swift */; };
 		A466B0392C24885C0094DC8C /* Btn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A466B0382C24885B0094DC8C /* Btn.swift */; };
 		A47CF4F52C2496A7006F8B50 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CF4F42C2496A7006F8B50 /* MailView.swift */; };
 		A47CF4F72C250B6D006F8B50 /* GachaResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */; };
 		A47CF4F92C2540E4006F8B50 /* CharacterCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */; };
-
+		ED62E4742C2526E5005DB211 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4732C2526E5005DB211 /* APIService.swift */; };
+		ED62E4762C252708005DB211 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4752C252708005DB211 /* ContentView.swift */; };
+		ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4772C25E927005DB211 /* RegisterView.swift */; };
+		ED62E47A2C25E9DC005DB211 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E4792C25E9DC005DB211 /* LoginView.swift */; };
+		ED62E47C2C269D3C005DB211 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED62E47B2C269D3C005DB211 /* AuthService.swift */; };
+		ED8047892C27BE09005A570C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8047882C27BE09005A570C /* MainView.swift */; };
+		ED80478B2C27C111005A570C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80478A2C27C111005A570C /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,11 +79,6 @@
 		37E5322F2C1F6FDF00317E81 /* NaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviBar.swift; sourceTree = "<group>"; };
 		37E532362C20934500317E81 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37E532382C20937100317E81 /* GachaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaView.swift; sourceTree = "<group>"; };
-		ED62E4732C2526E5005DB211 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = "ECCOC-front/APIService.swift"; sourceTree = SOURCE_ROOT; };
-		ED62E4752C252708005DB211 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		ED62E4772C25E927005DB211 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		ED62E4792C25E9DC005DB211 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		ED62E47B2C269D3C005DB211 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		37E5323A2C20A7EE00317E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A466B0342C23CFE90094DC8C /* MailBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBox.swift; sourceTree = "<group>"; };
 		A466B0362C23D1C40094DC8C /* TotalCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCoins.swift; sourceTree = "<group>"; };
@@ -90,7 +86,13 @@
 		A47CF4F42C2496A7006F8B50 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		A47CF4F62C250B6D006F8B50 /* GachaResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaResultView.swift; sourceTree = "<group>"; };
 		A47CF4F82C2540E4006F8B50 /* CharacterCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCatalogView.swift; sourceTree = "<group>"; };
-
+		ED62E4732C2526E5005DB211 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = "ECCOC-front/APIService.swift"; sourceTree = SOURCE_ROOT; };
+		ED62E4752C252708005DB211 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ED62E4772C25E927005DB211 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		ED62E4792C25E9DC005DB211 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		ED62E47B2C269D3C005DB211 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		ED8047882C27BE09005A570C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		ED80478A2C27C111005A570C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				37E5322B2C1F657A00317E81 /* View */,
 				37E531FC2C1F641300317E81 /* ECCOC_frontApp.swift */,
 				ED62E4732C2526E5005DB211 /* APIService.swift */,
+				ED8047882C27BE09005A570C /* MainView.swift */,
 				37E531FE2C1F641300317E81 /* TopView.swift */,
 				ED62E4752C252708005DB211 /* ContentView.swift */,
 				ED62E47B2C269D3C005DB211 /* AuthService.swift */,
@@ -207,6 +210,7 @@
 				37E5322C2C1F659400317E81 /* CharaView.swift */,
 				37E532382C20937100317E81 /* GachaView.swift */,
 				37E532362C20934500317E81 /* MapView.swift */,
+				ED80478A2C27C111005A570C /* HomeView.swift */,
 				37AD28072C27B0C3002D370F /* GamePlayMapView.swift */,
 				379986672C257A4400B46E10 /* CreateGameStepOenVIew.swift */,
 				377743732C26652A00BB69D6 /* CreateGameStepTwoVIew.swift */,
@@ -359,7 +363,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED80478B2C27C111005A570C /* HomeView.swift in Sources */,
 				37AD28062C278149002D370F /* GameViewModel.swift in Sources */,
+				ED8047892C27BE09005A570C /* MainView.swift in Sources */,
 				37E531FF2C1F641300317E81 /* TopView.swift in Sources */,
 				ED62E4782C25E927005DB211 /* RegisterView.swift in Sources */,
 				37E532392C20937100317E81 /* GachaView.swift in Sources */,
