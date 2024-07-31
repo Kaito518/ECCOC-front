@@ -16,6 +16,7 @@ struct HomeView: View {
     let bounds = UIScreen.main.bounds
     @State var path = NavigationPath()
     
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
@@ -32,7 +33,7 @@ struct HomeView: View {
                 Image("shadow")
                     .padding(.top, 350)
                 
-                Image("taiin")
+                Image("隊員")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 390, height: 390) // ここで画像のサイズを大きくします
