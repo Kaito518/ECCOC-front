@@ -72,6 +72,7 @@ struct NaviBar: View {
     let charaFunc:() -> Void
     let homeFunc:() -> Void
     let gachaFunc:() -> Void
+    let mapFunc: () -> Void
     let bounds = UIScreen.main.bounds;
     @State var count = 0;
     var body: some View {
@@ -98,14 +99,14 @@ struct NaviBar: View {
                         .position(x: bounds.width / 2, y: bounds.height - 75)
                 )
                 .onTapGesture {
-                    homeFunc()
+                    mapFunc()
                 }
             Image("homeIcon")
                 .resizable()
                 .frame(width: 55, height: 70)
                 .position(x: 80, y: bounds.height - 40)
                 .onTapGesture {
-                    charaFunc()
+                    homeFunc()
                 }
             Image("gacha")
                 .resizable()
@@ -127,6 +128,9 @@ struct NaviBar: View {
             () -> Void in
         },
         gachaFunc: {
+            () -> Void in
+        },
+        mapFunc: {
             () -> Void in
         }
     )

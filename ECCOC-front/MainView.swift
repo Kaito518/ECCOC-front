@@ -7,36 +7,39 @@
 
 import SwiftUI
 
-
 struct MainView: View {
+    @StateObject var characterViewModel = CharacterViewModel() // ViewModelを作成
+
     @State var path = NavigationPath()
-    @State private var currentView: ViewType = .map
+    @State private var currentView: ViewType = .home // 初期ビューを Home に設定
 
     var body: some View {
-        ZStack{
+        ZStack {
             HStack {
                 switch currentView {
                 case .chara:
-                    CharaView()
+                    CharaView(characterViewModel: characterViewModel) // ViewModel を渡す
                 case .gacha:
-                    GachaView()
-                default:
-                    HomeView()
+                    GachaView(characterViewModel: characterViewModel) // ViewModel を渡す
+                case .map:
+                    MapView(characterViewModel: characterViewModel)
+                case .home:
+                    HomeView(characterViewModel: characterViewModel) 
                 }
             }
-            VStack{
+            VStack {
                 NaviBar(
                     charaFunc: {
-                        () -> Void in
                         currentView = .chara
                     },
                     homeFunc: {
-                        () -> Void in
-                        currentView = .map
+                        currentView = .home
                     },
                     gachaFunc: {
-                        () -> Void in
                         currentView = .gacha
+                    },
+                    mapFunc: { 
+                        currentView = .map
                     }
                 )
             }
@@ -48,4 +51,3 @@ struct MainView: View {
 #Preview {
     MainView()
 }
-

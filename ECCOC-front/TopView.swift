@@ -7,45 +7,61 @@
 
 import SwiftUI
 
-enum ViewType {
+enum ViewType: Hashable {
     case map
     case chara
     case gacha
+    case home
 }
 
 struct TopView: View {
-    @State var path = NavigationPath()
-    @State private var currentView: ViewType = .map
+    @StateObject private var characterViewModel = CharacterViewModel() // ViewModel を作成
+    @State private var path = NavigationPath()
+    @State private var currentView: ViewType = .home // 初期ビューを Home に設定
 
     var body: some View {
-        ZStack{
-            HStack {
-                switch currentView {
-                case .chara:
-                    CharaView()
-                case .gacha:
-                    GachaView()
-                default:
-                    MapView()
+        NavigationStack(path: $path) {
+            VStack {
+                HStack {
+                    switch currentView {
+                    case .chara:
+                        CharaView(characterViewModel: characterViewModel)
+                    case .gacha:
+                        GachaView(characterViewModel: characterViewModel)
+                    case .home:
+                        HomeView(characterViewModel: characterViewModel)
+                    case .map:
+                        MapView(characterViewModel: characterViewModel) // 修正
+                    }
                 }
-            }
-            VStack{
                 NaviBar(
                     charaFunc: {
-                        () -> Void in
                         currentView = .chara
                     },
                     homeFunc: {
-                        () -> Void in
-                        currentView = .map
+                        currentView = .home
                     },
                     gachaFunc: {
-                        () -> Void in
                         currentView = .gacha
+                    },
+                    mapFunc: { 
+                        currentView = .map
                     }
                 )
+                .edgesIgnoringSafeArea(.all)
             }
-            .edgesIgnoringSafeArea(.all)
+            .navigationDestination(for: ViewType.self) { viewType in
+                switch viewType {
+                case .map:
+                    MapView(characterViewModel: characterViewModel) // 修正
+                case .chara:
+                    CharaView(characterViewModel: characterViewModel)
+                case .gacha:
+                    GachaView(characterViewModel: characterViewModel)
+                case .home:
+                    HomeView(characterViewModel: characterViewModel)
+                }
+            }
         }
     }
 }

@@ -10,17 +10,16 @@ import CoreLocation
 
 struct HomeView: View {
     @StateObject var gameViewModel = GameViewModel()
-    @State private var TotalCoin = 1000
+    @ObservedObject var characterViewModel: CharacterViewModel // Change to @ObservedObject
     
+    @State private var TotalCoin = 1000
     var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     let bounds = UIScreen.main.bounds
     @State var path = NavigationPath()
     
-    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                
                 // 背景画像を追加
                 Image("haikei1")
                     .resizable()
@@ -33,20 +32,21 @@ struct HomeView: View {
                 Image("shadow")
                     .padding(.top, 350)
                 
-                Image("隊員")
+                // Show the selected character for HomeView or fallback to "defaultImage"
+                Image(characterViewModel.selectedCharacterForHome ?? "defaultImage")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 390, height: 390) // ここで画像のサイズを大きくします
+                    .frame(width: 390, height: 390)
                     .padding(.top, -10)
                 
                 TotalCoins(TotalC: TotalCoin)
                     .padding(.top, -350)
                 
                 // Mail button as NavigationLink
-                NavigationLink(destination: MailView().navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: MailView(characterViewModel: characterViewModel).navigationBarBackButtonHidden(true)) {
                     Image("mailbutton")
                         .resizable()
-                        .frame(width: 55, height: 55) // Adjust the size as needed
+                        .frame(width: 55, height: 55)
                 }
                 .padding(.top, -355)
                 .offset(x: -155)
@@ -84,7 +84,7 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .position(CGPoint(x: bounds.width - 76.5, y: bounds.height - 170))
                         
-                        NavigationLink("キャラ図鑑", destination: CreateGameStepOenVIew(gameViewModel: gameViewModel))
+                        NavigationLink("キャラ図鑑", destination: CharacterCatalogView(characterViewModel: characterViewModel)) // Pass the ViewModel
                             .bold()
                             .foregroundStyle(.white)
                             .position(CGPoint(x: bounds.width - 76.5, y: bounds.height - 170))
@@ -98,14 +98,13 @@ struct HomeView: View {
             .ignoresSafeArea(.all)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
-            .navigationDestination(for: Router.self, destination: { append in
-                append.Destination()
-                    .navigationBarTitleDisplayMode(.inline)
-            })
+            .navigationDestination(for: Router.self) { route in
+                route.Destination(characterViewModel: characterViewModel) // 修正
+            }
         }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(characterViewModel: CharacterViewModel()) // Pass the ViewModel
 }

@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct MailView: View {
+    @ObservedObject var characterViewModel: CharacterViewModel // 追加
+
     let names = ["tamagogirai", "mujica", "mirai", "LuckyMan"]
     
     var body: some View {
         HStack {
-            NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true)) {
+            NavigationLink(destination: HomeView(characterViewModel: characterViewModel).navigationBarBackButtonHidden(true)) {
                 Image("returnBtn")
                     .resizable()
-                    .frame(width: 55, height: 55) // Adjust the size as needed
+                    .frame(width: 55, height: 55)
             }
             .offset(x: 12)
             
@@ -24,9 +26,9 @@ struct MailView: View {
             Image("settingBtn")
                 .offset(x: -12)
         }
-        ScrollView{
+        ScrollView {
             VStack(spacing: 0) {
-                ForEach(names, id: \.self){ name in
+                ForEach(names, id: \.self) { name in
                     MailBox(userName: name)
                 }
             }
@@ -35,5 +37,5 @@ struct MailView: View {
 }
 
 #Preview {
-    MailView()
+    MailView(characterViewModel: CharacterViewModel()) // Pass the ViewModel
 }

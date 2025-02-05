@@ -10,120 +10,132 @@ import MapKit
 import CoreLocation
 
 struct GamePlayMapView: View {
-    var gameViewModel = true;
-    @State var isStart = false;
-    // 東京駅の座標
-    @State private var position: MapCameraPosition = .region(.init(
-        center: .init(latitude: 35.681236 - 0.0074, longitude: 139.767 + 0.0062),
-        span: .init(latitudeDelta: 0.026, longitudeDelta: 0.005)
-    ))
-    
-    let bounds = UIScreen.main.bounds;
-    @State var path = NavigationPath()
-    
+    var meetingLocation: CLLocationCoordinate2D
+    var goalLocation: CLLocationCoordinate2D // 目的地も受け取るよう修正
+
+    @StateObject private var locationManager = LocationManager()
+    @State private var region: MKCoordinateRegion
+    @State private var userLocation: CLLocationCoordinate2D?
+
+    @State private var isStart = true
+    @State private var hasMovedToUserLocation = false // 初回のみ現在地を中央に
+
+    let bounds = UIScreen.main.bounds
+
+    init(meetingLocation: CLLocationCoordinate2D, goalLocation: CLLocationCoordinate2D) {
+        self.meetingLocation = meetingLocation
+        self.goalLocation = goalLocation
+        _region = State(initialValue: MKCoordinateRegion(
+            center: meetingLocation,
+            span: MKCoordinateSpan(latitudeDelta: 0.026, longitudeDelta: 0.005)
+        ))
+    }
+
     var body: some View {
         ZStack {
-            Map(position: $position) {
-                if(gameViewModel){
-                    ForEach(0..<30) { index in
-                        Annotation("", coordinate: CLLocationCoordinate2D(latitude: 35.682 + Double.random(in: -0.02...0.02),longitude: 139.766 + Double.random(in: -0.02...0.02))) {
-                            Image(systemName: "bitcoinsign.circle.fill")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(.white, .yellow)
-                                .cornerRadius(50)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .stroke(.brown, lineWidth: 3)
-                                )
+            Map(coordinateRegion: $region, annotationItems: createAnnotations()) { location in
+                MapAnnotation(coordinate: location.annotation.coordinate) {
+                    annotationView(for: location.annotation)
+                        .onTapGesture {
+                            if location.annotation.title ?? "" == "You" {
+                                moveToCurrentLocation()
+                            }
                         }
-                    }
-                }
-                Annotation("", coordinate: CLLocationCoordinate2D(latitude: 35.682 - 0.006 ,longitude: 139.766 + 0.006)) {
-                    Image(systemName: "bitcoinsign.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.white, .yellow)
-                        .cornerRadius(50)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                                .stroke(.brown, lineWidth: 3)
-                        )
-                }
-                Annotation("", coordinate: CLLocationCoordinate2D(latitude: 35.681236 ,longitude: 139.767125)) {
-                    Image("gool")
-                        .resizable()
-                        .frame(width: 40, height: 60)
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.white, .yellow)
-                        .cornerRadius(50)
-                }
-                Annotation("", coordinate: CLLocationCoordinate2D(latitude: 35.681236 - 0.0074 ,longitude: 139.767 + 0.0062)) {
-                    Image("me")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.white, .yellow)
-                        .cornerRadius(50)
                 }
             }
-            .onAppear{
+            .onAppear {
+                locationManager.requestLocation()
                 withAnimation(.linear(duration: 0.8)) {
                     isStart = true
                 }
             }
-            if(!gameViewModel){
-                ZStack{
-                    UnevenRoundedRectangle(
-                        cornerRadii: .init(
-                            topLeading: 50.0,
-                            bottomLeading: 50.0,
-                            bottomTrailing: 0.0,
-                            topTrailing: 0.0
-                        ),
-                        style: .continuous
-                    )
-                    .frame(width: 160, height: 55)
-                    .foregroundStyle(.red)
-                    .position(CGPoint(x: bounds.width - 80, y: bounds.height - 170))
-                    UnevenRoundedRectangle(
-                        cornerRadii: .init(
-                            topLeading: 50.0,
-                            bottomLeading: 50.0,
-                            bottomTrailing: 0.0,
-                            topTrailing: 0.0
-                        ),
-                        style: .continuous
-                    )
-                    .stroke(style: .init(lineWidth: 2,dash: [6, 3]))
-                    .frame(width: 155, height: 45)
-                    .foregroundColor(.white)
-                    .position(CGPoint(x: bounds.width - 76.5, y: bounds.height - 170))
-                    
-                    Text("ゲーム作成")
-                        .bold()
-                        .foregroundStyle(.white)
-                        .position(CGPoint(x: bounds.width - 76.5, y: bounds.height - 170))
+            .onChange(of: locationManager.userLocation) { newLocation in
+                if let newLocation = newLocation {
+                    userLocation = newLocation.coordinate
+                    if !hasMovedToUserLocation {
+                        region.center = newLocation.coordinate
+                        hasMovedToUserLocation = true
+                    }
                 }
             }
-            
-            if(isStart) {
-                Image("start")
+
+            if isStart {
+                VStack {
+                    Spacer()
+                    Image("start")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 300)
+                        .padding()
+                    Spacer()
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            isStart = false
+                        }
+                    }
+                }
             }
-            
         }
-        .ignoresSafeArea(.all)
-        .navigationBarBackButtonHidden()
-        .overlay(
-            RoundedRectangle(cornerRadius: 50)
-                .stroke(gameViewModel ? .cyan : .clear, lineWidth: 16)
-        )
-        .ignoresSafeArea(.all)
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+    }
+
+    private func createAnnotations() -> [IdentifiablePointAnnotation] {
+        var annotations = [IdentifiablePointAnnotation]()
+
+        let meetingAnnotation = MKPointAnnotation()
+        meetingAnnotation.coordinate = meetingLocation
+        meetingAnnotation.title = "Meeting Point"
+        annotations.append(IdentifiablePointAnnotation(annotation: meetingAnnotation))
+
+        let goalAnnotation = MKPointAnnotation()
+        goalAnnotation.coordinate = goalLocation
+        goalAnnotation.title = "Goal"
+        annotations.append(IdentifiablePointAnnotation(annotation: goalAnnotation))
+
+        if let userLocation = userLocation {
+            let userAnnotation = MKPointAnnotation()
+            userAnnotation.coordinate = userLocation
+            userAnnotation.title = "You"
+            annotations.append(IdentifiablePointAnnotation(annotation: userAnnotation))
+        }
+
+        return annotations
+    }
+
+    private func annotationView(for annotation: MKPointAnnotation) -> some View {
+        Group {
+            if annotation.title == "Meeting Point" {
+                Image(systemName: "mappin.circle.fill")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.blue)
+            } else if annotation.title == "Goal" {
+                Image("goal") // ゴールアイコンをカスタム
+                    .resizable()
+                    .frame(width: 40, height: 40)
+            } else if annotation.title == "You" {
+                Image("icon3") // ユーザーの位置アイコン
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+            }
+        }
+    }
+
+    private func moveToCurrentLocation() {
+        if let userLocation = userLocation {
+            region.center = userLocation
+        }
     }
 }
 
 #Preview {
-    GamePlayMapView()
+    GamePlayMapView(
+        meetingLocation: CLLocationCoordinate2D(latitude: 35.681236, longitude: 139.767125),
+        goalLocation: CLLocationCoordinate2D(latitude: 35.6895, longitude: 139.6917) // 新宿の座標
+    )
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct GachaResultView: View {
     var CharaName: String
     var CharaExplanation: String
-    @State private var path = NavigationPath()
+    @ObservedObject var characterViewModel: CharacterViewModel // 追加
     
     var body: some View {
         VStack(spacing: 20) {
@@ -19,8 +19,8 @@ struct GachaResultView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300,height: 300)
             
-            VStack{
-                HStack(spacing: 22){
+            VStack {
+                HStack(spacing: 22) {
                     Text("名前")
                         .foregroundColor(Color("sabu2"))
                         .fontWeight(.bold)
@@ -32,7 +32,7 @@ struct GachaResultView: View {
                 }
                 .offset(x: -92,y: 10)
                 
-                ZStack{}
+                ZStack {}
                     .frame(width: 350,height: 2)
                     .overlay(
                         GeometryReader { geometry in
@@ -40,14 +40,13 @@ struct GachaResultView: View {
                                 path.move(to: CGPoint(x: 0, y: geometry.size.height))
                                 path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height))
                             }
-                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [2, 2]))// 点と点の間隔を狭くします
+                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [2, 2])) // 点と点の間隔を狭く
                             .foregroundColor(Color("sabu2"))
                         }
                     )
                     .offset(x: 0,y: 4)
                 
-                
-                HStack(spacing: 20){
+                HStack(spacing: 20) {
                     VStack {
                         Text("説明")
                             .foregroundColor(Color("sabu2"))
@@ -57,7 +56,7 @@ struct GachaResultView: View {
                         
                         Spacer()
                     }
-                    ScrollView{
+                    ScrollView {
                         Text(CharaExplanation)
                             .frame(width: 260)
                     }
@@ -70,10 +69,10 @@ struct GachaResultView: View {
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color("sabu2"),lineWidth: 10)
+                    .stroke(Color("sabu2"), lineWidth: 10)
             )
             
-            NavigationLink(destination: CharacterCatalogView(ReleasedCharacter: CharaName)) {
+            NavigationLink(destination: CharacterCatalogView(characterViewModel: characterViewModel)) {
                 Btn(text: "キャラ図鑑へ", bgColor: "BtnColor")
             }
         }
@@ -84,8 +83,8 @@ struct GachaResultView: View {
 
 #Preview {
     GachaResultView(
-        CharaName:"たいちょ",
-        CharaExplanation:
-            "探検隊の隊員として数多くの探索を成功させきた。\n\n好きなことは、寝ること"
+        CharaName: "たいちょ",
+        CharaExplanation: "探検隊の隊員として数多くの探索を成功させきた。\n\n好きなことは、寝ること",
+        characterViewModel: CharacterViewModel() // 追加
     )
 }

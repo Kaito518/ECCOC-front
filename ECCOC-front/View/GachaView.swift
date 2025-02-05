@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct GachaView: View {
-    private var GetCharaName = "スライム"
-    private var CharaExplanation = "水から生まれたスライムちゃん。\nいつも空を見上げて過ごしてます\n\n触ったら◉ぬ"
+    // キャラクターリスト
+    let characters = [
+        ("スライム", "水から生まれたスライムちゃん。\nいつも空を見上げて過ごしてます\n\n触ったら◉ぬ"),
+        ("コリパ", "コリパの説明"),
+        ("Sキング", "Sキングの説明"),
+        ("隊員", "隊員の説明"),
+        ("たいちょ", "たいちょの説明"),
+        ("くまさん", "くまさんの説明"),
+        ("ぐまさん", "ぐまさんの説明"),
+        ("囚人", "囚人の説明"),
+        ("看守", "看守の説明"),
+    ]
+    
+    @State private var GetCharaName = "スライム"
+    @State private var CharaExplanation = "水から生まれたスライムちゃん。\nいつも空を見上げて過ごしてます\n\n触ったら◉ぬ"
     @State private var showingConfirmation = false
     @State private var buttonOpacity: Double = 1.0
     @State private var rotation: Double = 0
@@ -29,6 +42,8 @@ struct GachaView: View {
     @State private var showingAlert = false
     @State private var path = NavigationPath()
     
+    @ObservedObject var characterViewModel: CharacterViewModel
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
@@ -42,13 +57,13 @@ struct GachaView: View {
                         Image("gachagacha")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 250,height: 450)
+                            .frame(width: 250, height: 450)
                         
                         Image("BlueCapsule")
-                            .offset(x:0 ,y: offset)
+                            .offset(x: 0, y: offset)
                         
                         Image("gachaFlame")
-                            .offset(x: 0,y: 120)
+                            .offset(x: 0, y: 120)
                         
                         Image("Handle")
                             .resizable()
@@ -61,42 +76,42 @@ struct GachaView: View {
                     ZStack {
                         Button(action: {
                             showingConfirmation = true
-                        },label: {
+                        }, label: {
                             VStack {
                                 Text("ガチャを引く")
                                     .font(.system(size: 14))
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
-                                    .offset(x: 0,y: 2)
+                                    .offset(x: 0, y: 2)
                                 
                                 ZStack {
                                     Capsule()
                                         .fill(Color("GachaColor"))
-                                        .frame(width:100, height: 20)
-                                        .offset(x: 0,y: -2)
+                                        .frame(width: 100, height: 20)
+                                        .offset(x: 0, y: -2)
                                     
                                     HStack(spacing: 30) {
                                         Image("coin")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 20,height: 16)
+                                            .frame(width: 20, height: 16)
                                         
                                         Text("1000")
                                             .foregroundColor(.white)
                                             .font(.system(size: 12))
                                     }
-                                    .offset(x: 0,y: -2)
+                                    .offset(x: 0, y: -2)
                                 }
                             }
                         })
-                        .frame(width: 150,height: 55)
+                        .frame(width: 150, height: 55)
                         .background(Color("BtnColor"))
                         .cornerRadius(10)
                         .opacity(buttonOpacity)
                         .shadow(color: Color.black.opacity(0.25), radius: 2, x: 2, y: 2)
                     }
                 }
-                .offset(x: 0,y: -45)
+                .offset(x: 0, y: 70)
                 
                 if showingConfirmation {
                     ZStack {
@@ -107,7 +122,7 @@ struct GachaView: View {
                                 Button("いいえ") {
                                     showingConfirmation = false
                                 }
-                                .frame(width: 120,height: 40)
+                                .frame(width: 120, height: 40)
                                 .background(Color("maincolor"))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -121,7 +136,12 @@ struct GachaView: View {
                                         
                                         showingConfirmation = false
                                         
-                                        // ガチャを開始するコードをここに移動
+                                        // ランダムなキャラクターを取得
+                                        let randomCharacter = getRandomCharacter()
+                                        GetCharaName = randomCharacter.name
+                                        CharaExplanation = randomCharacter.explanation
+                                        
+                                        // アニメーション処理
                                         withAnimation(Animation.linear(duration: 0)) {
                                             buttonOpacity = 0.0
                                         }
@@ -129,22 +149,22 @@ struct GachaView: View {
                                             rotation += 720
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                            withAnimation{
+                                            withAnimation {
                                                 offset = 170
                                             }
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
-                                            withAnimation{
+                                            withAnimation {
                                                 isDimmed = true
                                             }
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                            withAnimation{
+                                            withAnimation {
                                                 gacha = true
                                             }
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                                            withAnimation{
+                                            withAnimation {
                                                 WhiteDivision = -65
                                                 BlueDivision = 65
                                                 WhiteOpened = 45
@@ -155,14 +175,13 @@ struct GachaView: View {
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
                                             character = true
-                                            withAnimation(.easeInOut(duration: 2.0)){
+                                            withAnimation(.easeInOut(duration: 2.0)) {
                                                 Undo = 0
                                             }
                                         }
                                     }
-                                    
                                 }
-                                .frame(width: 120,height: 40)
+                                .frame(width: 120, height: 40)
                                 .background(Color("BtnColor"))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -178,75 +197,94 @@ struct GachaView: View {
                         .cornerRadius(20)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color("BtnColor"),lineWidth: 10)
+                                .stroke(Color("BtnColor"), lineWidth: 10)
                         )
                     }
+                    .offset(x: 0, y: 70)
                     .shadow(color: Color.black.opacity(0.25), radius: 2, x: 0, y: 0)
                 }
                 if isDimmed {
                     Rectangle()
                         .foregroundColor(.black)
                         .edgesIgnoringSafeArea(.all)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .opacity(0.5)
+                        .offset(x: 0, y: 50)
                 }
                 if Whiteout {
                     Color.white.opacity(Undo)
                         .edgesIgnoringSafeArea(.all)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .zIndex(100)
                 }
                 if gacha {
                     Image("charaGet")
-                        .offset(x: 0,y: -250)
+                        .offset(x: 0, y: -110)
                     ZStack {
                         HStack {
                             Image("WhiteHalfCapsule")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 50,height: 100)
-                                .offset(x: WhiteDivision,y: Discharge)
+                                .frame(width: 50, height: 100)
+                                .offset(x: WhiteDivision, y: Discharge)
                                 .rotationEffect(.degrees(WhiteOpened))
                             Image("BlueHalfCapsule")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 50,height: 100)
-                                .offset(x: BlueDivision,y: Discharge)
+                                .frame(width: 50, height: 100)
+                                .offset(x: BlueDivision, y: Discharge)
                                 .rotationEffect(.degrees(BlueOpened))
                         }
                         .onAppear {
                             withAnimation {
-                                Discharge = 80
-                                WhiteDivision = 4
-                                BlueDivision = -4
-                                WhiteOpened = 0
-                                BlueOpened = 0
+                                Discharge = 150 // カプセルの開く位置を調整
+                                WhiteDivision = 70 // 横方向の開く位置を調整
+                                BlueDivision = -70 // 横方向の開く位置を調整
+                                WhiteOpened = 45 // 開く角度を調整
+                                BlueOpened = -45 // 開く角度を調整
                             }
                         }
                     }
                     .offset(x: 0, y: Open)
                     .onAppear {
                         withAnimation {
-                            Open = 0
+                            Open = 20 // 縦方向の位置を調整
                         }
                     }
                 }
                 if character {
-                    NavigationLink(value: Router.charaResult){
+                    NavigationLink(value: Router.charaResult) {
                         Image(GetCharaName)
-                            .frame(width: 300,height: 300)
+                            .frame(width: 300, height: 300)
+                            .offset(x: 0, y: 120)
                     }
                 }
             }
             .ignoresSafeArea(.all)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Router.self, destination: {
-                append in
-                append.Destination(CharaName: GetCharaName, CharaExplanation: CharaExplanation)
-                    .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Router.self, destination: { append in
+                append.Destination(
+                    CharaName: GetCharaName,
+                    CharaExplanation: CharaExplanation,
+                    characterViewModel: characterViewModel // ViewModel を渡す
+                )
+                .navigationBarTitleDisplayMode(.inline)
             })
+            
+            // キャラ図鑑へのリンクを追加
+            NavigationLink("キャラ図鑑", destination: CharacterCatalogView(characterViewModel: characterViewModel))
+                .bold()
+                .foregroundStyle(.white)
+                .position(CGPoint(x: 300, y: 600)) // 座標は適宜調整してください
         }
+    }
+    
+    // ランダムなキャラクターを取得する関数
+    func getRandomCharacter() -> (name: String, explanation: String) {
+        return characters.randomElement() ?? ("スライム", "水から生まれたスライムちゃん。\nいつも空を見上げて過ごしてます\n\n触ったら◉ぬ")
     }
 }
 
 #Preview {
-    GachaView()
+    GachaView(characterViewModel: CharacterViewModel())
 }

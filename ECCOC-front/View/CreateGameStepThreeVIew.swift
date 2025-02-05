@@ -6,19 +6,28 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct Acount {
-    var code = UUID()     // ユニークなIDを自動で設定
-    var name : String
-    var icon : String
+    var code = UUID()
+    var name: String
+    var icon: String
     var isInvitation: Bool
 }
 
 struct CreateGameStepThreeVIew: View {
     @Environment(\.dismiss) var dismiss
-    let bounds = UIScreen.main.bounds;
-    @State var inputName = ""
-    @State var isPopup = false
+    let bounds = UIScreen.main.bounds
+
+    var meetingLocation: String = "未設定" // CreateGameStepOenVIewから渡される
+    var meetingTime: Date = Date()
+    var startTime: Int = 0
+    @State private var inputName = ""
+    @State private var isPopup = false
+    @State private var isActive = false
+    @State private var goalCoordinate: CLLocationCoordinate2D?
+    @State private var errorMessage: String? // エラー表示用メッセージ
+
     @State private var acounts = [
         Acount(name: "ken", icon: "スライム", isInvitation: false),
         Acount(name: "higo", icon: "たいちょ", isInvitation: false),
@@ -26,13 +35,12 @@ struct CreateGameStepThreeVIew: View {
         Acount(name: "koudai", icon: "隊員", isInvitation: false),
         Acount(name: "kawagishi", icon: "くまさん", isInvitation: false)
     ]
-    @State var testBool = false;
-    @State private var isActive = false
+
     var body: some View {
-        ZStack{
-            VStack(spacing: 0){
-                VStack(spacing: 0){
-                    ZStack{
+        ZStack {
+            VStack(spacing: 0) {
+                VStack(spacing: 0) {
+                    ZStack {
                         Circle()
                             .foregroundColor(.cyan)
                             .frame(width: 70)
@@ -45,12 +53,14 @@ struct CreateGameStepThreeVIew: View {
                                 .foregroundStyle(.white)
                         }
                     }
-                    .padding([.bottom], 8)
-                    .padding([.top], 24)
+                    .padding(.bottom, 8)
+                    .padding(.top, 24)
+
                     Text("友達を招待しよう")
                         .fontWeight(.heavy)
-                        .padding([.bottom], 32)
-                    HStack(spacing: 0){
+                        .padding(.bottom, 32)
+
+                    HStack(spacing: 0) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
                         TextField("友達を検索", text: $inputName)
@@ -58,40 +68,43 @@ struct CreateGameStepThreeVIew: View {
                             .cornerRadius(5)
                             .frame(width: bounds.width * 0.8)
                     }
-                    .padding([.leading, .trailing], 8)
+                    .padding(.horizontal, 8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.primary.opacity(0.6), lineWidth: 0.3)
                     )
-                    .padding([.bottom], 8)
+                    .padding(.bottom, 8)
+
                     ScrollView {
                         ForEach(0..<acounts.count, id: \.self) { index in
-                            HStack{
+                            HStack {
                                 Image(acounts[index].icon)
                                     .resizable()
                                     .frame(width: 50, height: 50)
+
                                 Text(acounts[index].name)
                                     .font(.body)
+
                                 Spacer()
+
                                 Button(action: {
                                     acounts[index].isInvitation.toggle()
                                 }, label: {
-                                    ZStack{
+                                    ZStack {
                                         RoundedRectangle(cornerRadius: 8)
                                             .frame(width: 80, height: 32)
                                             .foregroundColor(acounts[index].isInvitation ? .gray : .yellow)
-                                        
-                                        Text(acounts[index].isInvitation ? "招待済み": "招待する")
+
+                                        Text(acounts[index].isInvitation ? "招待済み" : "招待する")
                                             .foregroundStyle(.white)
                                             .font(.caption)
                                             .fontWeight(.bold)
-                                        
                                     }
                                 })
                             }
                             .frame(width: bounds.width * 0.8)
-                            .padding([.leading, .trailing], 10)
-                            .padding([.top, .bottom], 5)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
                             .overlay(
                                 Rectangle()
                                     .frame(height: 1)
@@ -99,16 +112,17 @@ struct CreateGameStepThreeVIew: View {
                                 alignment: .bottom
                             )
                         }
-                        
                     }
                     Spacer()
                 }
                 .frame(height: bounds.height * 0.7)
+
                 Button(action: {
-                    isPopup = true
+                    geocodeMeetingLocation()
                 }, label: {
                     Btn(text: "次へ", bgColor: "BtnColor")
                 })
+
                 Spacer()
             }
             .navigationBarBackButtonHidden()
@@ -122,15 +136,40 @@ struct CreateGameStepThreeVIew: View {
                 )
                 .position(CGPoint(x: 25, y: 10.0))
             )
+
+            // エラー表示用ポップアップ
+            if let errorMessage = errorMessage {
+                VStack {
+                    Text("エラー")
+                        .font(.headline)
+                        .padding()
+                    Text(errorMessage)
+                        .font(.body)
+                        .padding()
+                    Button("閉じる") {
+                        self.errorMessage = nil
+                    }
+                    .padding()
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                }
+                .frame(width: bounds.width * 0.8)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(12)
+            }
+
             if isPopup {
                 ZStack {
                     Color.black.opacity(0.5)
                         .edgesIgnoringSafeArea(.all)
-                    VStack(spacing: 32) {
-                        VStack(spacing: 0){
+
+                    VStack(spacing: 16) {
+                        VStack(spacing: 0) {
                             Text("集合場所")
                                 .fontWeight(.bold)
-                                .padding([.bottom], 4)
+                                .padding(.bottom, 4)
                                 .frame(width: 124)
                                 .overlay(
                                     Rectangle()
@@ -138,13 +177,14 @@ struct CreateGameStepThreeVIew: View {
                                         .foregroundColor(.yellow),
                                     alignment: .bottom
                                 )
-                                .padding([.bottom], 8)
-                            Text("東京駅")
+                                .padding(.bottom, 8)
+                            Text(meetingLocation)
+                                .font(.title3)
                         }
-                        VStack(spacing: 0){
+                        VStack(spacing: 0) {
                             Text("集合時間")
                                 .fontWeight(.bold)
-                                .padding([.bottom], 4)
+                                .padding(.bottom, 4)
                                 .frame(width: 124)
                                 .overlay(
                                     Rectangle()
@@ -152,13 +192,14 @@ struct CreateGameStepThreeVIew: View {
                                         .foregroundColor(.yellow),
                                     alignment: .bottom
                                 )
-                                .padding([.bottom], 8)
-                            Text("20:00")
+                                .padding(.bottom, 8)
+                            Text(formatDate(date: meetingTime))
+                                .font(.title3)
                         }
-                        VStack(spacing: 0){
+                        VStack(spacing: 0) {
                             Text("開始時間")
                                 .fontWeight(.bold)
-                                .padding([.bottom], 4)
+                                .padding(.bottom, 4)
                                 .frame(width: 124)
                                 .overlay(
                                     Rectangle()
@@ -166,12 +207,15 @@ struct CreateGameStepThreeVIew: View {
                                         .foregroundColor(.yellow),
                                     alignment: .bottom
                                 )
-                                .padding([.bottom], 8)
-                            Text("60分前")
+                                .padding(.bottom, 8)
+                            Text("\(startTime)分前")
+                                .font(.title3)
                         }
                         Text("この設定でゲームを作成しますか？")
                             .fontWeight(.bold)
-                        HStack(spacing: 16){
+                            .font(.title3)
+
+                        HStack(spacing: 16) {
                             Btn(text: "いいえ", bgColor: "maincolor")
                                 .onTapGesture {
                                     isPopup = false
@@ -180,24 +224,58 @@ struct CreateGameStepThreeVIew: View {
                                 .onTapGesture {
                                     isActive = true
                                 }
-                            NavigationLink(destination: GamePlayMapView(), isActive: $isActive){
+                            NavigationLink(
+                                destination: GamePlayMapView(
+                                    meetingLocation: goalCoordinate ?? CLLocationCoordinate2D(latitude: 35.681236, longitude: 139.767125),
+                                    goalLocation: goalCoordinate ?? CLLocationCoordinate2D(latitude: 35.681236, longitude: 139.767125)
+                                ),
+                                isActive: $isActive
+                            ) {
                                 EmptyView()
                             }
                         }
-                        
                     }
-                    .frame(width: bounds.width * 0.7)
+                    .frame(width: bounds.width * 0.75)
                     .padding()
                     .background(.white)
                     .padding(8)
-                    .border(Color("BtnColor"), width: 8)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .border(Color("BtnColor"), width: 6)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
         }
     }
+
+    private func geocodeMeetingLocation() {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(meetingLocation) { placemarks, error in
+            if let error = error {
+                print("Geocoding error: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.errorMessage = "住所を確認してください: \(meetingLocation)"
+                }
+            } else if let placemark = placemarks?.first,
+                      let location = placemark.location {
+                DispatchQueue.main.async {
+                    self.goalCoordinate = location.coordinate
+                    self.isPopup = true
+                }
+            }
+        }
+    }
+
+    private func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return formatter.string(from: date)
+    }
 }
 
 #Preview {
-    CreateGameStepThreeVIew()
+    // 必要な引数を渡す
+    CreateGameStepThreeVIew(
+        meetingLocation: "東京駅",
+        meetingTime: Date(),
+        startTime: 10
+    )
 }

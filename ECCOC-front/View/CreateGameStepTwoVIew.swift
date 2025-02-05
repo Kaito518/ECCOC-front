@@ -9,16 +9,19 @@ import SwiftUI
 
 struct CreateGameStepTwoVIew: View {
     @Environment(\.dismiss) var dismiss
-    let bounds = UIScreen.main.bounds;
+    let bounds = UIScreen.main.bounds
+    
     @State var inputName = ""
     @State private var date = Date()
-    @State var selectedIndex: Int = 0
+    @State var selectedIndex: Int = 10  // 初期値を設定
     @State private var isChecked = true
     
+    var meetingLocation: String  // Passed from Step 1
+    
     var body: some View {
-        VStack(spacing: 0){
+        VStack(spacing: 0) {
             VStack(spacing: 0) {
-                ZStack{
+                ZStack {
                     Circle()
                         .foregroundColor(.green)
                         .frame(width: 70)
@@ -33,11 +36,12 @@ struct CreateGameStepTwoVIew: View {
                 }
                 .padding([.bottom], 8)
                 .padding([.top], 24)
+                
                 Text("時間を設定しよう")
                     .fontWeight(.heavy)
                     .padding([.bottom], 32)
                 
-                VStack(spacing: 8){
+                VStack(spacing: 8) {
                     DatePicker("集合日時", selection: $date)
                     Rectangle()
                         .frame(height: 1)
@@ -45,7 +49,7 @@ struct CreateGameStepTwoVIew: View {
                     HStack {
                         Text("開始時間")
                         Spacer()
-                        Picker("色を選択", selection: $selectedIndex) {
+                        Picker("開始時間", selection: $selectedIndex) {
                             Text("10分前").tag(10)
                             Text("30分前").tag(30)
                             Text("1時間前").tag(60)
@@ -61,7 +65,8 @@ struct CreateGameStepTwoVIew: View {
                 )
                 .border(.gray)
                 .padding([.bottom], 32)
-                VStack(spacing: 8){
+                
+                VStack(spacing: 8) {
                     HStack {
                         Toggle(isOn: $isChecked) {
                             Text("通知")
@@ -79,9 +84,12 @@ struct CreateGameStepTwoVIew: View {
                 Spacer()
             }
             .frame(height: bounds.height * 0.7)
-            NavigationLink(destination: CreateGameStepThreeVIew()){
+            
+            // Pass the selected data to the next view
+            NavigationLink(destination: CreateGameStepThreeVIew(meetingLocation: meetingLocation, meetingTime: date, startTime: selectedIndex)) {
                 Btn(text: "次へ", bgColor: "BtnColor")
             }
+            
             Spacer()
         }
         .navigationBarBackButtonHidden()
@@ -95,9 +103,15 @@ struct CreateGameStepTwoVIew: View {
             )
             .position(CGPoint(x: 25, y: 10.0))
         )
+        .onAppear {
+            // 無効な値を防ぐためのデフォルト値設定
+            if selectedIndex != 10 && selectedIndex != 30 && selectedIndex != 60 {
+                selectedIndex = 10
+            }
+        }
     }
 }
 
 #Preview {
-    CreateGameStepTwoVIew()
+    CreateGameStepTwoVIew(meetingLocation: "東京駅")
 }

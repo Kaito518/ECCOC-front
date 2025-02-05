@@ -7,20 +7,30 @@
 
 import SwiftUI
 
-enum Router: Int{
+enum Router: Int {
     case root, chara, charaResult
     
-    var toString: String{
+    var toString: String {
         ["ホーム"][self.rawValue]
     }
     
     @ViewBuilder
-    func Destination(CharaName:String = " ", CharaExplanation: String  = "") -> some View{
+    func Destination(
+        CharaName: String = " ",
+        CharaExplanation: String = "",
+        characterViewModel: CharacterViewModel // 追加
+    ) -> some View {
         switch self {
-        case .root: MapView()
-        case .chara: CharaView()
-        case .charaResult: GachaResultView(CharaName: CharaName, CharaExplanation: CharaExplanation)
+        case .root:
+            MapView(characterViewModel: characterViewModel) // 修正: ViewModel を渡す
+        case .chara:
+            CharaView(characterViewModel: characterViewModel) // 修正: ViewModel を渡す
+        case .charaResult:
+            GachaResultView(
+                CharaName: CharaName,
+                CharaExplanation: CharaExplanation,
+                characterViewModel: characterViewModel // 修正: ViewModel を渡す
+            )
         }
     }
 }
-

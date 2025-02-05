@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct CharaView: View {
-    @State var path = NavigationPath()
-    
+    @ObservedObject var characterViewModel: CharacterViewModel // 追加
+
     var body: some View {
-        Text("Chara!")
-        NavigationLink(Router.root.toString, value: Router.root)
+        VStack {
+            Text("キャラ選択画面")
+            Text("現在のキャラ: \(characterViewModel.selectedCharacterForHome ?? "未選択")")
+        }
     }
 }
 
 #Preview {
-    CharaView()
+    CharaView(characterViewModel: CharacterViewModel()) // 追加
 }
+
