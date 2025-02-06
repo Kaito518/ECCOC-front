@@ -9,6 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct HomeView: View {
+    @StateObject var navigationController = NavigationController()
     @StateObject var gameViewModel = GameViewModel()
     @ObservedObject var characterViewModel: CharacterViewModel // Change to @ObservedObject
     
@@ -18,7 +19,7 @@ struct HomeView: View {
     @State var path = NavigationPath()
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navigationController.path) {
             ZStack {
                 // 背景画像を追加
                 Image("haikei1")
@@ -102,6 +103,7 @@ struct HomeView: View {
                 route.Destination(characterViewModel: characterViewModel) // 修正
             }
         }
+        .environmentObject(NavigationController())
     }
 }
 

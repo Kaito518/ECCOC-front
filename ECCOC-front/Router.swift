@@ -7,29 +7,36 @@
 
 import SwiftUI
 
-enum Router: Int {
-    case root, chara, charaResult
+enum Router: Hashable {
+    case root
+    case chara
+    case charaResult(CharaName: String, CharaExplanation: String) // ✅ 引数を持たせる
     
     var toString: String {
-        ["ホーム"][self.rawValue]
+        switch self {
+        case .root:
+            return "ホーム"
+        case .chara:
+            return "キャラ"
+        case .charaResult(let CharaName, _): // ✅ キャラ名を表示する場合
+            return CharaName
+        }
     }
     
     @ViewBuilder
     func Destination(
-        CharaName: String = " ",
-        CharaExplanation: String = "",
-        characterViewModel: CharacterViewModel // 追加
+        characterViewModel: CharacterViewModel // ✅ ViewModel のみ渡す
     ) -> some View {
         switch self {
         case .root:
-            MapView(characterViewModel: characterViewModel) // 修正: ViewModel を渡す
+            MapView(characterViewModel: characterViewModel)
         case .chara:
-            CharaView(characterViewModel: characterViewModel) // 修正: ViewModel を渡す
-        case .charaResult:
+            CharaView(characterViewModel: characterViewModel)
+        case .charaResult(let CharaName, let CharaExplanation): // ✅ 修正
             GachaResultView(
                 CharaName: CharaName,
                 CharaExplanation: CharaExplanation,
-                characterViewModel: characterViewModel // 修正: ViewModel を渡す
+                characterViewModel: characterViewModel
             )
         }
     }

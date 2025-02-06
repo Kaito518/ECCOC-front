@@ -19,14 +19,15 @@ struct CreateGameStepThreeVIew: View {
     @Environment(\.dismiss) var dismiss
     let bounds = UIScreen.main.bounds
 
-    var meetingLocation: String = "未設定" // CreateGameStepOenVIewから渡される
+    var meetingLocation: String = "未設定"
     var meetingTime: Date = Date()
     var startTime: Int = 0
+
     @State private var inputName = ""
     @State private var isPopup = false
     @State private var isActive = false
     @State private var goalCoordinate: CLLocationCoordinate2D?
-    @State private var errorMessage: String? // エラー表示用メッセージ
+    @State private var errorMessage: String?
 
     @State private var acounts = [
         Acount(name: "ken", icon: "スライム", isInvitation: false),
@@ -137,115 +138,17 @@ struct CreateGameStepThreeVIew: View {
                 .position(CGPoint(x: 25, y: 10.0))
             )
 
-            // エラー表示用ポップアップ
             if let errorMessage = errorMessage {
-                VStack {
-                    Text("エラー")
-                        .font(.headline)
-                        .padding()
-                    Text(errorMessage)
-                        .font(.body)
-                        .padding()
-                    Button("閉じる") {
-                        self.errorMessage = nil
-                    }
-                    .padding()
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                }
-                .frame(width: bounds.width * 0.8)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
+                errorPopup(message: errorMessage)
             }
 
             if isPopup {
-                ZStack {
-                    Color.black.opacity(0.5)
-                        .edgesIgnoringSafeArea(.all)
-
-                    VStack(spacing: 16) {
-                        VStack(spacing: 0) {
-                            Text("集合場所")
-                                .fontWeight(.bold)
-                                .padding(.bottom, 4)
-                                .frame(width: 124)
-                                .overlay(
-                                    Rectangle()
-                                        .frame(height: 1)
-                                        .foregroundColor(.yellow),
-                                    alignment: .bottom
-                                )
-                                .padding(.bottom, 8)
-                            Text(meetingLocation)
-                                .font(.title3)
-                        }
-                        VStack(spacing: 0) {
-                            Text("集合時間")
-                                .fontWeight(.bold)
-                                .padding(.bottom, 4)
-                                .frame(width: 124)
-                                .overlay(
-                                    Rectangle()
-                                        .frame(height: 1)
-                                        .foregroundColor(.yellow),
-                                    alignment: .bottom
-                                )
-                                .padding(.bottom, 8)
-                            Text(formatDate(date: meetingTime))
-                                .font(.title3)
-                        }
-                        VStack(spacing: 0) {
-                            Text("開始時間")
-                                .fontWeight(.bold)
-                                .padding(.bottom, 4)
-                                .frame(width: 124)
-                                .overlay(
-                                    Rectangle()
-                                        .frame(height: 1)
-                                        .foregroundColor(.yellow),
-                                    alignment: .bottom
-                                )
-                                .padding(.bottom, 8)
-                            Text("\(startTime)分前")
-                                .font(.title3)
-                        }
-                        Text("この設定でゲームを作成しますか？")
-                            .fontWeight(.bold)
-                            .font(.title3)
-
-                        HStack(spacing: 16) {
-                            Btn(text: "いいえ", bgColor: "maincolor")
-                                .onTapGesture {
-                                    isPopup = false
-                                }
-                            Btn(text: "はい", bgColor: "BtnColor")
-                                .onTapGesture {
-                                    isActive = true
-                                }
-                            NavigationLink(
-                                destination: GamePlayMapView(
-                                    meetingLocation: goalCoordinate ?? CLLocationCoordinate2D(latitude: 35.681236, longitude: 139.767125),
-                                    goalLocation: goalCoordinate ?? CLLocationCoordinate2D(latitude: 35.681236, longitude: 139.767125)
-                                ),
-                                isActive: $isActive
-                            ) {
-                                EmptyView()
-                            }
-                        }
-                    }
-                    .frame(width: bounds.width * 0.75)
-                    .padding()
-                    .background(.white)
-                    .padding(8)
-                    .border(Color("BtnColor"), width: 6)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
+                confirmationPopup()
             }
         }
     }
 
+    /// **位置情報を取得**
     private func geocodeMeetingLocation() {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(meetingLocation) { placemarks, error in
@@ -264,6 +167,111 @@ struct CreateGameStepThreeVIew: View {
         }
     }
 
+    /// **エラーポップアップ**
+    private func errorPopup(message: String) -> some View {
+        VStack {
+            Text("エラー")
+                .font(.headline)
+                .padding()
+            Text(message)
+                .font(.body)
+                .padding()
+            Button("閉じる") {
+                self.errorMessage = nil
+            }
+            .padding()
+            .background(Color.red)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+        }
+        .frame(width: bounds.width * 0.8)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+    }
+
+    /// **確認ポップアップ**
+    private func confirmationPopup() -> some View {
+        ZStack {
+            Color.black.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 16) {
+                VStack(spacing: 0) {
+                    Text("集合場所")
+                        .fontWeight(.bold)
+                        .padding(.bottom, 4)
+                        .frame(width: 124)
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.yellow),
+                            alignment: .bottom
+                        )
+                        .padding(.bottom, 8)
+                    Text(meetingLocation)
+                        .font(.title3)
+                }
+                VStack(spacing: 0) {
+                    Text("集合時間")
+                        .fontWeight(.bold)
+                        .padding(.bottom, 4)
+                        .frame(width: 124)
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.yellow),
+                            alignment: .bottom
+                        )
+                        .padding(.bottom, 8)
+                    Text(formatDate(date: meetingTime))
+                        .font(.title3)
+                }
+                VStack(spacing: 0) {
+                    Text("開始時間")
+                        .fontWeight(.bold)
+                        .padding(.bottom, 4)
+                        .frame(width: 124)
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.yellow),
+                            alignment: .bottom
+                        )
+                        .padding(.bottom, 8)
+                    Text("\(startTime)分前")
+                        .font(.title3)
+                }
+                Text("この設定でゲームを作成しますか？")
+                    .fontWeight(.bold)
+                    .font(.title3)
+
+                HStack(spacing: 16) {
+                    Btn(text: "いいえ", bgColor: "maincolor")
+                        .onTapGesture {
+                            isPopup = false
+                        }
+                    Btn(text: "はい", bgColor: "BtnColor")
+                        .onTapGesture {
+                            isActive = true
+                        }
+                    NavigationLink(
+                        destination: GamePlayMapView(goalLocation: goalCoordinate ?? CLLocationCoordinate2D(latitude: 35.681236, longitude: 139.767125)),
+                        isActive: $isActive
+                    ) {
+                        EmptyView()
+                    }
+                }
+            }
+            .frame(width: bounds.width * 0.75)
+            .padding()
+            .background(.white)
+            .padding(8)
+            .border(Color("BtnColor"), width: 6)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+
     private func formatDate(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -272,10 +280,6 @@ struct CreateGameStepThreeVIew: View {
 }
 
 #Preview {
-    // 必要な引数を渡す
-    CreateGameStepThreeVIew(
-        meetingLocation: "東京駅",
-        meetingTime: Date(),
-        startTime: 10
-    )
+    CreateGameStepThreeVIew(meetingLocation: "東京駅", meetingTime: Date(), startTime: 10)
 }
+

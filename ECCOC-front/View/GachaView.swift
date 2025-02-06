@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct GachaView: View {
     // キャラクターリスト
     let characters = [
@@ -47,6 +48,11 @@ struct GachaView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
+                Color.black.opacity(isDimmed ? 0.3 : 0)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .ignoresSafeArea()
+                        .zIndex(2)
+                
                 VStack(spacing: 16) {
                     TotalCoins(TotalC: TotalCoin)
                     Text("新しいキャラを手に入れよう！")
@@ -203,20 +209,23 @@ struct GachaView: View {
                     .offset(x: 0, y: 70)
                     .shadow(color: Color.black.opacity(0.25), radius: 2, x: 0, y: 0)
                 }
+                // 🔹 修正: 黒い背景を最背面に配置
+                Color.black.opacity(isDimmed ? 0.5 : 0)
+                    .ignoresSafeArea(edges: .all)
+
+                // 🔹 修正: isDimmed が true のとき確実に画面全体を覆う
                 if isDimmed {
-                    Rectangle()
-                        .foregroundColor(.black)
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .opacity(0.5)
-                        .offset(x: 0, y: 50)
+                    Color.black.opacity(0.5)
+                        .ignoresSafeArea()
                 }
+
+                // 🔹 修正: 白い背景 (Whiteout) も全体を覆うように
                 if Whiteout {
                     Color.white.opacity(Undo)
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .ignoresSafeArea()
                         .zIndex(100)
                 }
+                
                 if gacha {
                     Image("charaGet")
                         .offset(x: 0, y: -110)
@@ -253,7 +262,7 @@ struct GachaView: View {
                     }
                 }
                 if character {
-                    NavigationLink(value: Router.charaResult) {
+                    NavigationLink(value: Router.charaResult(CharaName: GetCharaName, CharaExplanation: CharaExplanation)) {
                         Image(GetCharaName)
                             .frame(width: 300, height: 300)
                             .offset(x: 0, y: 120)
@@ -262,14 +271,20 @@ struct GachaView: View {
             }
             .ignoresSafeArea(.all)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Router.self, destination: { append in
-                append.Destination(
-                    CharaName: GetCharaName,
-                    CharaExplanation: CharaExplanation,
-                    characterViewModel: characterViewModel // ViewModel を渡す
-                )
-                .navigationBarTitleDisplayMode(.inline)
-            })
+            .navigationDestination(for: Router.self) { route in
+                switch route {
+                case .root:
+                    MapView(characterViewModel: characterViewModel)
+                case .chara:
+                    CharaView(characterViewModel: characterViewModel)
+                case .charaResult(let name, let explanation): // ✅ 修正: 引数を受け取れる
+                    GachaResultView(
+                        CharaName: name,
+                        CharaExplanation: explanation,
+                        characterViewModel: characterViewModel
+                    )
+                }
+            }
             
             // キャラ図鑑へのリンクを追加
             NavigationLink("キャラ図鑑", destination: CharacterCatalogView(characterViewModel: characterViewModel))
